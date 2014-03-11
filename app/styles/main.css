@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'Triforce';
+    src: url('Triforce.ttf');
+}
+
+.sidebar-left, .sidebar-right {
+    float: left;
+    margin: 10px 10px;
+    position: relative;
+    height: 588px;
+    width: 280px;
+}
+
+.map {
+    margin: 10px 0;
+    width: 588px;
+    height: 588px;
+    float: left;
+}
+
+.map-row {
+    clear: both;
+}
+.map-col {
+    float: left;
+    height: 14px;
+    width: 14px;
+    background: #0f0;
+    border: 1px solid rgba(44, 44, 44, 0.5);
+}
+
+.stats, .map-dungeon {
+    width: 280px;
+    height: 280px;
+}
+.map-dungeon .map-col {
+    width: 10px;
+    height: 10px;
+}
+
+.map-dungeon-bottom-left, .map-dungeon-bottom-right {
+    position: absolute; bottom: 0;
+}
+
+.stats {
+    background: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    top: 0;
+}
+
+.stats h1 {
+    font-family: 'Triforce', Arial, sans-serif;
+    color: #af8e2d;
+    text-align: center;
+    background: #fff;
+    line-height: 50px;
+    margin: 0 0 10px;
+}
+
+
+.main {
+    margin-top: -100px;
+    border-top: 30px solid #245e37;
+    background: rgba(44, 44, 44, 0.5);
+    z-index: 10;
+    position: relative;
+}
+
+.logo {
+    width: 342px;
+    margin: auto;
+    display: block;
+    z-index: 5;
+    position: relative;
+}
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* Space out content a bit */
+body {
+    padding-top: 5px;
+    padding-bottom: 20px;
+    background: url("../images/background.jpg") center 0 no-repeat #af8e2d;
+}
+
+.header {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Custom page footer */
+.footer {
+    color: #fff;
+    padding-right: 5px;
+    height: 30px;
+    background: #245e37;
+    line-height: 30px;
+}
+
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+
+    .container { width: 1188px; }
+
+    /* Remove the padding we set earlier */
+    .header,
+    .footer {
+        padding-left: 0;
+    }
+
+    /* Space out the masthead */
+    .header {
+        margin-bottom: 30px;
+    }
+
+}
