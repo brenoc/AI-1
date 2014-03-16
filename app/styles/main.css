@@ -18,14 +18,17 @@
     float: left;
 }
 
+.map-world {
+  background: url('../images/grass.fw.png');
+}
+
 .map-world td {
     height: 14px;
     width: 14px;
-    background: transparent;
 }
 
 .map-world td.F {
-  background: url('../images/forrest.fw.png') #89BC26;
+  background: url('../images/forrest.fw.png');
 }
 .map-world td.G {
   background: url('../images/grass.fw.png');
@@ -38,6 +41,12 @@
 }
 .map-world td.S {
   background: url('../images/sand.fw.png');
+}
+.map-world td.H {
+  background: url('../images/hirule.fw.png');
+}
+.map-world td.E {
+  background: url('../images/sword.fw.png');
 }
 .map-dungeon {
   background: url('../images/sand.fw.png');
