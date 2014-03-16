@@ -18,24 +18,63 @@
     float: left;
 }
 
-.map-row {
-    clear: both;
-}
-.map-col {
-    float: left;
+.map-world td {
     height: 14px;
     width: 14px;
-    background: #0f0;
-    border: 1px solid rgba(44, 44, 44, 0.5);
+    background: transparent;
+}
+
+.map-world td.F {
+  background: url('../images/forrest.fw.png') #89BC26;
+}
+.map-world td.G {
+  background: url('../images/grass.fw.png');
+}
+.map-world td.M {
+  background: url('../images/mountain.fw.png');
+}
+.map-world td.W {
+  background: url('../images/water.fw.png');
+}
+.map-world td.S {
+  background: url('../images/sand.fw.png');
+}
+.map-dungeon {
+  background: url('../images/sand.fw.png');
+}
+.map-dungeon td.D {
+  background: url('../images/dungeon.fw.png');
+}
+.map-dungeon td.L {
+  background: url('../images/sand.fw.png');
+}
+
+.map-world td.P {
+  background: url('../images/door.fw.png') #C39753;
+}
+.map-dungeon td.P {
+  background: url('../images/door-d.fw.png') #C39753;
+}
+
+.map-dungeon-bottom-left td.X {
+  background: url('../images/pendant-1.fw.png')
+}
+.map-dungeon-top-right td.X {
+  background: url('../images/pendant-2.fw.png')
+}
+.map-dungeon-bottom-right td.X {
+  background: url('../images/pendant-3.fw.png')
 }
 
 .stats, .map-dungeon {
     width: 280px;
     height: 280px;
 }
-.map-dungeon .map-col {
-    width: 10px;
+
+.map-dungeon td {
     height: 10px;
+    width: 10px;
+    background: transparent;
 }
 
 .map-dungeon-bottom-left, .map-dungeon-bottom-right {
