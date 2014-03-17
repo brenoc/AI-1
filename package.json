@@ -4,6 +4,7 @@
   "dependencies": {},
   "devDependencies": {
     "gulp": "~3.5.0",
+    "coffee-script": "latest",
     "gulp-load-plugins": "~0.3.0",
     "gulp-util": "~2.2.9",
     "gulp-autoprefixer": "~0.0.6",

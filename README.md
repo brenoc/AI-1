@@ -9,13 +9,15 @@ First project of Artificial Intelligence class @ PUC-Rio
 
 Install [node](http://nodejs.org/)
 
-Then install the dependencies. In your terminal type:
+Then install the dependencies. Inside the repo root folder, type in your terminal:
 
 ```bash
 npm i -g gulp
 npm i -g bower
+npm i -g coffee-script
 npm i 
 bower i
+gulp
 ```
 
 ### Running
