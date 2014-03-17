@@ -2,6 +2,8 @@ requirejs.config
   baseUrl: 'scripts/js/'
 
 # Main function
-requirejs ['render/artist'], (Artist) ->
+requirejs ['render/artist', 'render/link'], (Artist, Link) ->
   artist = new Artist()
-  artist.render()
+  link = new Link(24, 27)
+
+

@@ -75,6 +75,12 @@
   background: url('../images/pendant-3.fw.png')
 }
 
+.map-world .link.link-standing {
+  background: url('../images/link-standing.fw.png');
+  height: 14px;
+  width: 14px;
+}
+
 .stats, .map-dungeon {
     width: 280px;
     height: 280px;
