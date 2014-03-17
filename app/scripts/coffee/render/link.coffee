@@ -1,5 +1,5 @@
 
-define ['render/world'], (Artist) ->
+define ['render/world'], (World) ->
   class Link
     constructor: (x, y) ->
       @world = new World()
