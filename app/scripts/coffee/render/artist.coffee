@@ -23,7 +23,9 @@ define ['render/map'], (Map, Link) ->
       for row in map
         x = 0
         for col in row
-          @getPositionSelector(x, y, mapDOM).addClass(col)
+          @getPositionSelector(x, y, mapDOM)
+            .addClass(col)
+            .data('cost', @getCost(col))
           x++
         y++
 
@@ -32,6 +34,17 @@ define ['render/map'], (Map, Link) ->
         return $('.map-row-'+y+'.map-col-'+x+' .link', map)
       else
         return $('.map-row-'+y+'.map-col-'+x, map)
+
+    getCost: (type) ->
+      switch type
+        when 'G' then return 10
+        when 'S' then return 20
+        when 'F' then return 100
+        when 'M' then return 150
+        when 'W' then return 180
+        when 'L' then return 10
+        when 'D' then return Infinity
+        else return 0
 
     getMap: (mapName) =>
       switch mapName
