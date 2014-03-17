@@ -14,24 +14,34 @@ define ['render/artist'], (Artist) ->
 
       @render(x, y, @link.map)
 
-    render: (x, y, map) =>
-      # Verifica se ele está parado
-      if @link.map is map and
-         @link.position.x is x and
-         @link.position.y is y
-        @remove()
-        @link.direction = 'standing'
-        @paint()
-        return
-      # TODO outros casos em que ele muda de direção
+    moveLeft: =>
+      @link.direction = 'left'
+      return @render(@link.position.x-1, @link.position.y, @link.map)
 
-    paint: () =>
+    moveRight: =>
+      @link.direction = 'right'
+      return @render(@link.position.x+1, @link.position.y, @link.map)
+
+    moveUp: =>
+      @link.direction = 'up'
+      return @render(@link.position.x, @link.position.y-1, @link.map)
+
+    moveDown: =>
+      @link.direction = 'down'
+      return @render(@link.position.x, @link.position.y+1, @link.map)
+
+    render: (x, y, map) =>
+      @remove()
+      @link.position.x = x
+      @link.position.y = y
+      @link.map = map
       map = @artist.getMap(@link.map)
       position = @artist.getPositionSelector @link.position.x,
                                              @link.position.y,
                                              map
       link = '<div class="link link-'+@link.direction+'"></div>'
       $(position, map).append(link)
+      return
 
     remove: () =>
       map = @artist.getMap(@link.map)

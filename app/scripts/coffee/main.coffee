@@ -4,6 +4,6 @@ requirejs.config
 # Main function
 requirejs ['render/artist', 'render/link'], (Artist, Link) ->
   artist = new Artist()
-  link = new Link(24, 27)
+  window.link = new Link(24, 27)
 
 

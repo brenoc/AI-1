@@ -1,32 +1,38 @@
 @font-face {
-    font-family: 'Triforce';
-    src: url('Triforce.ttf');
+  font-family: 'Triforce';
+  src: url('Triforce.ttf');
 }
 
 .sidebar-left, .sidebar-right {
-    float: left;
-    margin: 10px 10px;
-    position: relative;
-    height: 588px;
-    width: 280px;
+  float: left;
+  margin: 10px 10px;
+  position: relative;
+  height: 588px;
+  width: 280px;
 }
 
 .map {
-    margin: 10px 0;
-    width: 588px;
-    height: 588px;
-    float: left;
+  margin: 10px 0;
+  width: 588px;
+  height: 588px;
+  float: left;
 }
 
-.map-world {
+.map-world tr {
   background: url('../images/grass.fw.png');
+  height: 14px !important;
+  padding: 0;
+  margin: 0;
 }
 
 .map-world td {
-    height: 14px;
-    width: 14px;
+  height: 14px !important;
+  width: 14px !important;
+  padding: 0;
+  margin: 0;
 }
 
+/* Map sprites */
 .map-world td.F {
   background: url('../images/forrest.fw.png');
 }
@@ -57,7 +63,6 @@
 .map-dungeon td.L {
   background: url('../images/sand.fw.png');
 }
-
 .map-world td.P {
   background: url('../images/door.fw.png') #C39753;
 }
@@ -65,6 +70,7 @@
   background: url('../images/door-d.fw.png') #C39753;
 }
 
+/* Pendants */
 .map-dungeon-bottom-left td.X {
   background: url('../images/pendant-1.fw.png')
 }
@@ -75,102 +81,132 @@
   background: url('../images/pendant-3.fw.png')
 }
 
-.map-world .link.link-standing {
+/* Link */
+.map-world .link { height: 14px; width: 14px; }
+.map-world .link-standing {
   background: url('../images/link-standing.fw.png');
-  height: 14px;
-  width: 14px;
+}
+.map-world .link-up {
+  background: url('../images/link-up.fw.png');
+}
+.map-world .link-right {
+  background: url('../images/link-right.fw.png');
+}
+.map-world .link-down {
+  background: url('../images/link-down.fw.png');
+}
+.map-world .link-left {
+  background: url('../images/link-left.fw.png');
 }
 
+.map-dungeon .link { height: 10px; width: 10px; }
+.map-dungeon .link-standing {
+  background: url('../images/link-standing-d.fw.png');
+}
+.map-dungeon .link-up {
+  background: url('../images/link-up-d.fw.png');
+}
+.map-dungeon .link-right {
+  background: url('../images/link-right-d.fw.png');
+}
+.map-dungeon .link-down {
+  background: url('../images/link-down-d.fw.png');
+}
+.map-dungeon .link-left {
+  background: url('../images/link-left-d.fw.png');
+}
+
+/* Misc */
 .stats, .map-dungeon {
-    width: 280px;
-    height: 280px;
+  width: 280px;
+  height: 280px;
 }
 
 .map-dungeon td {
-    height: 10px;
-    width: 10px;
-    background: transparent;
+  height: 10px;
+  width: 10px;
+  background: transparent;
 }
 
 .map-dungeon-bottom-left, .map-dungeon-bottom-right {
-    position: absolute; bottom: 0;
+  position: absolute; bottom: 0;
 }
 
 .stats {
-    background: rgba(255, 255, 255, 0.6);
-    position: absolute;
-    top: 0;
+  background: rgba(255, 255, 255, 0.6);
+  position: absolute;
+  top: 0;
 }
 
 .stats h1 {
-    font-family: 'Triforce', Arial, sans-serif;
-    color: #af8e2d;
-    text-align: center;
-    background: #fff;
-    line-height: 50px;
-    margin: 0 0 10px;
+  font-family: 'Triforce', Arial, sans-serif;
+  color: #af8e2d;
+  text-align: center;
+  background: #fff;
+  line-height: 50px;
+  margin: 0 0 10px;
 }
 
 
 .main {
-    margin-top: -100px;
-    border-top: 30px solid #245e37;
-    background: rgba(44, 44, 44, 0.5);
-    z-index: 10;
-    position: relative;
+  margin-top: -100px;
+  border-top: 30px solid #245e37;
+  background: rgba(44, 44, 44, 0.5);
+  z-index: 10;
+  position: relative;
 }
 
 .logo {
-    width: 342px;
-    margin: auto;
-    display: block;
-    z-index: 5;
-    position: relative;
+  width: 342px;
+  margin: auto;
+  display: block;
+  z-index: 5;
+  position: relative;
 }
 
 .browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
 }
 
 /* Space out content a bit */
 body {
-    padding-top: 5px;
-    padding-bottom: 20px;
-    background: url("../images/background.jpg") center 0 no-repeat #af8e2d;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  background: url("../images/background.jpg") center 0 no-repeat #af8e2d;
 }
 
 .header {
-    padding-left: 15px;
-    padding-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 /* Custom page footer */
 .footer {
-    color: #fff;
-    padding-right: 5px;
-    height: 30px;
-    background: #245e37;
-    line-height: 30px;
+  color: #fff;
+  padding-right: 5px;
+  height: 30px;
+  background: #245e37;
+  line-height: 30px;
 }
 
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
 
-    .container { width: 1188px; }
+  .container { width: 1188px; }
 
-    /* Remove the padding we set earlier */
-    .header,
-    .footer {
-        padding-left: 0;
-    }
+  /* Remove the padding we set earlier */
+  .header,
+  .footer {
+    padding-left: 0;
+  }
 
-    /* Space out the masthead */
-    .header {
-        margin-bottom: 30px;
-    }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
 
 }
