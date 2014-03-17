@@ -1,8 +1,8 @@
 
-define ['render/artist'], (Artist) ->
+define ['render/world'], (Artist) ->
   class Link
     constructor: (x, y) ->
-      @artist = new Artist()
+      @world = new World()
 
       @link =
         map: 'world'
@@ -53,19 +53,19 @@ define ['render/artist'], (Artist) ->
       @link.position.x = x
       @link.position.y = y
       @link.map = map
-      map = @artist.getMap(@link.map)
-      position = @artist.getPositionSelector @link.position.x,
-                                             @link.position.y,
-                                             map
+      map = @world.getMap(@link.map)
+      position = @world.getPositionSelector @link.position.x,
+                                            @link.position.y,
+                                            map
       link = '<div class="link link-'+@link.direction+'"></div>'
       $(position, map).append(link)
       return
 
     remove: () =>
-      map = @artist.getMap(@link.map)
-      link = @artist.getPositionSelector @link.position.x,
-                                         @link.position.y,
-                                         map, true
+      map = @world.getMap(@link.map)
+      link = @world.getPositionSelector @link.position.x,
+                                        @link.position.y,
+                                        map, true
       $(link).remove() if link
 
 

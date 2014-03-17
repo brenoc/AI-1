@@ -1,6 +1,6 @@
 
 define ['render/map'], (Map, Link) ->
-  class Artist
+  class World
     constructor: (x, y) ->
       @maps = new Map()
 
