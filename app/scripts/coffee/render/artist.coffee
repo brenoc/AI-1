@@ -26,6 +26,8 @@ define ['render/map'], (Map, Link) ->
           @getPositionSelector(x, y, mapDOM)
             .addClass(col)
             .data('cost', @getCost(col))
+            .data('x', x)
+            .data('y', y)
           x++
         y++
 
