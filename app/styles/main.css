@@ -32,6 +32,17 @@
   margin: 0;
 }
 
+.map-dungeon tr, .map-dungeon td {
+  height: 10px !important;
+  padding: 0;
+  margin: 0;
+}
+
+.map-dungeon td {
+  width: 10px !important;
+  background: transparent;
+}
+
 /* Map sprites */
 .map-world td.F {
   background: url('../images/forrest.fw.png');
@@ -120,12 +131,6 @@
 .stats, .map-dungeon {
   width: 280px;
   height: 280px;
-}
-
-.map-dungeon td {
-  height: 10px;
-  width: 10px;
-  background: transparent;
 }
 
 .map-dungeon-bottom-left, .map-dungeon-bottom-right {

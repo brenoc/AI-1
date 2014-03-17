@@ -30,6 +30,24 @@ define ['render/artist'], (Artist) ->
       @link.direction = 'down'
       return @render(@link.position.x, @link.position.y+1, @link.map)
 
+    enterDungeon1: =>
+      x = $('.dungeon1 .P').data('x')
+      y = $('.dungeon1 .P').data('y')
+      @link.direction = 'standing'
+      @render(x, y, 'dungeon1')
+
+    enterDungeon2: =>
+      x = $('.dungeon2 .P').data('x')
+      y = $('.dungeon2 .P').data('y')
+      @link.direction = 'standing'
+      @render(x, y, 'dungeon1')
+
+    enterDungeon3: =>
+      x = $('.dungeon3 .P').data('x')
+      y = $('.dungeon3 .P').data('y')
+      @link.direction = 'standing'
+      @render(x, y, 'dungeon3')
+
     render: (x, y, map) =>
       @remove()
       @link.position.x = x
