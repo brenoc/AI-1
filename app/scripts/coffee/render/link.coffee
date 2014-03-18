@@ -30,23 +30,35 @@ define ->
       @link.direction = 'down'
       return @render(@link.position.x, @link.position.y+1, @link.map)
 
-    enterDungeon1: =>
-      x = $('.dungeon1 .P').data('x')
-      y = $('.dungeon1 .P').data('y')
-      @link.direction = 'standing'
-      @render(x, y, 'dungeon1')
+    atDungeonDoor: () =>
+      map = @world.getMap(@link.map)
+      position = @world.getPositionSelector @link.position.x,
+                                            @link.position.y,
+                                            map
 
-    enterDungeon2: =>
-      x = $('.dungeon2 .P').data('x')
-      y = $('.dungeon2 .P').data('y')
-      @link.direction = 'standing'
-      @render(x, y, 'dungeon1')
+      if @link.map is 'world'
+        dungeon = $(position).data('dungeon')
+        return if dungeon then 'dungeon'+dungeon else false
+      else
+        return $(position).hasClass('P')
 
-    enterDungeon3: =>
-      x = $('.dungeon3 .P').data('x')
-      y = $('.dungeon3 .P').data('y')
+    enter: =>
+      return if not @atDungeonDoor()
+
+      dungeon = @atDungeonDoor()
+
+      x = $('.'+dungeon+' .P').data('x')
+      y = $('.'+dungeon+' .P').data('y')
       @link.direction = 'standing'
-      @render(x, y, 'dungeon3')
+      @render(x, y, dungeon)
+
+    leave: =>
+      return if not @atDungeonDoor()
+
+      x = $('.'+@link.map+'-entrance').data('x')
+      y = $('.'+@link.map+'-entrance').data('y')
+      @link.direction = 'standing'
+      @render(x, y, 'world')
 
     render: (x, y, map) =>
       @remove()
