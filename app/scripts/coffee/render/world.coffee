@@ -1,8 +1,9 @@
 
 define ['render/map'], (Map, Link) ->
   class World
-    constructor: (x, y) ->
+    constructor: (setup) ->
       @maps = new Map()
+      @setup = setup
 
       @worldMap = '.map-world tbody'
       @dungeon1Map = '.map-dungeon-bottom-left tbody'
@@ -16,6 +17,7 @@ define ['render/map'], (Map, Link) ->
       @renderMap(@maps.dungeon1, $(@dungeon1Map))
       @renderMap(@maps.dungeon2, $(@dungeon2Map))
       @renderMap(@maps.dungeon3, $(@dungeon3Map))
+      @renderConfigElements()
 
     renderMap: (map, elem) ->
       mapDOM = elem
@@ -30,6 +32,39 @@ define ['render/map'], (Map, Link) ->
             .data('y', y)
           x++
         y++
+
+    renderConfigElements: =>
+      @renderWorldElements()
+      @renderDungeonElements()
+
+    renderWorldElements: =>
+      map = @getMap('world')
+
+      i = 1
+      while i < 4
+        current = 'dungeon'+i
+        setup = @setup.world[current]
+
+        @getPositionSelector(setup.x, setup.y, map)
+          .addClass(current+'-entrance')
+          .addClass('P')
+          .data('dungeon', i)
+
+        i++
+
+    renderDungeonElements: =>
+      i = 1
+      while i < 4
+        current = 'dungeon'+i
+        dungeon = @getMap(current)
+        setup = @setup.dungeons[current]
+
+        @getPositionSelector(setup.door.x, setup.door.y, dungeon)
+          .addClass('P')
+        @getPositionSelector(setup.pendant.x, setup.pendant.y, dungeon)
+          .addClass('X')
+
+        i++
 
     getPositionSelector: (x, y, map, link) ->
       if link
@@ -58,3 +93,5 @@ define ['render/map'], (Map, Link) ->
           return $(@dungeon2Map)
         when 'dungeon3'
           return $(@dungeon3Map)
+
+

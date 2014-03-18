@@ -59,8 +59,8 @@
 .map-world td.S {
   background: url('../images/sand.fw.png');
 }
-.map-world td.H {
-  background: url('../images/hirule.fw.png');
+.map-world td.O {
+  background: url('../images/lostwoods.fw.png');
 }
 .map-world td.E {
   background: url('../images/sword.fw.png');

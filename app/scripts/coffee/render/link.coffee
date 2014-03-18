@@ -1,18 +1,18 @@
 
-define ['render/world'], (World) ->
+define ->
   class Link
-    constructor: (x, y) ->
-      @world = new World()
+    constructor: (setup, world) ->
+      @world = world
 
       @link =
         map: 'world'
         position:
-          x: x
-          y: y
+          x: setup.link.x
+          y: setup.link.y
         direction:
           'standing'
 
-      @render(x, y, @link.map)
+      @render(@link.position.x, @link.position.y, @link.map)
 
     moveLeft: =>
       @link.direction = 'left'
