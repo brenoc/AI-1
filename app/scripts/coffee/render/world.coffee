@@ -13,10 +13,10 @@ define ['render/map'], (Map, Link) ->
       @render()
 
     render: =>
-      @renderMap(@maps.world, $(@worldMap))
-      @renderMap(@maps.dungeon1, $(@dungeon1Map))
-      @renderMap(@maps.dungeon2, $(@dungeon2Map))
-      @renderMap(@maps.dungeon3, $(@dungeon3Map))
+      @renderMap(@maps.world, 'world')
+      @renderMap(@maps.dungeon1, 'dungeon1')
+      @renderMap(@maps.dungeon2, 'dungeon2')
+      @renderMap(@maps.dungeon3, 'dungeon3')
       @renderConfigElements()
 
     renderMap: (map, elem) ->
@@ -38,14 +38,12 @@ define ['render/map'], (Map, Link) ->
       @renderDungeonElements()
 
     renderWorldElements: =>
-      map = @getMap('world')
-
       i = 1
       while i < 4
         current = 'dungeon'+i
         setup = @setup.world[current]
 
-        @getPositionSelector(setup.x, setup.y, map)
+        @getPositionSelector(setup.x, setup.y, 'world')
           .addClass(current+'-entrance')
           .addClass('P')
           .data('dungeon', i)
@@ -56,21 +54,20 @@ define ['render/map'], (Map, Link) ->
       i = 1
       while i < 4
         current = 'dungeon'+i
-        dungeon = @getMap(current)
         setup = @setup.dungeons[current]
 
-        @getPositionSelector(setup.door.x, setup.door.y, dungeon)
+        @getPositionSelector(setup.door.x, setup.door.y, current)
           .addClass('P')
-        @getPositionSelector(setup.pendant.x, setup.pendant.y, dungeon)
+        @getPositionSelector(setup.pendant.x, setup.pendant.y, current)
           .addClass('X')
 
         i++
 
     getPositionSelector: (x, y, map, link) ->
       if link
-        return $('.map-row-'+y+'.map-col-'+x+' .link', map)
+        return $('.map-'+map+' .map-row-'+y+'.map-col-'+x+' .link')
       else
-        return $('.map-row-'+y+'.map-col-'+x, map)
+        return $('.map-'+map+' .map-row-'+y+'.map-col-'+x)
 
     getCost: (type) ->
       switch type
@@ -82,16 +79,4 @@ define ['render/map'], (Map, Link) ->
         when 'L' then return 10
         when 'D' then return Infinity
         else return 0
-
-    getMap: (mapName) =>
-      switch mapName
-        when 'world'
-          return $(@worldMap)
-        when 'dungeon1'
-          return $(@dungeon1Map)
-        when 'dungeon2'
-          return $(@dungeon2Map)
-        when 'dungeon3'
-          return $(@dungeon3Map)
-
 

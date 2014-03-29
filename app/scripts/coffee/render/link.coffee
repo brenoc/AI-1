@@ -31,10 +31,9 @@ define ->
       return @render(@link.position.x, @link.position.y+1, @link.map)
 
     atDungeonDoor: () =>
-      map = @world.getMap(@link.map)
       position = @world.getPositionSelector @link.position.x,
                                             @link.position.y,
-                                            map
+                                            @link.map
 
       if @link.map is 'world'
         dungeon = $(position).data('dungeon')
@@ -65,19 +64,17 @@ define ->
       @link.position.x = x
       @link.position.y = y
       @link.map = map
-      map = @world.getMap(@link.map)
       position = @world.getPositionSelector @link.position.x,
                                             @link.position.y,
-                                            map
+                                            @link.map
       link = '<div class="link link-'+@link.direction+'"></div>'
       $(position, map).append(link)
       return
 
     remove: () =>
-      map = @world.getMap(@link.map)
       link = @world.getPositionSelector @link.position.x,
                                         @link.position.y,
-                                        map, true
+                                        @link.map, true
       $(link).remove() if link
 
 
