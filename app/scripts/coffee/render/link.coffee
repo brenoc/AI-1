@@ -4,38 +4,36 @@ define ->
     constructor: (setup, world) ->
       @world = world
 
-      @link =
-        map: 'world'
-        position:
-          x: setup.link.x
-          y: setup.link.y
-        direction:
-          'standing'
+      @map = 'world'
+      @position =
+        x: setup.link.x
+        y: setup.link.y
+      @direction = 'standing'
 
-      @render(@link.position.x, @link.position.y, @link.map)
+      @render(@position.x, @position.y, @map)
 
     moveLeft: =>
-      @link.direction = 'left'
-      return @render(@link.position.x-1, @link.position.y, @link.map)
+      @direction = 'left'
+      return @render(@position.x-1, @position.y, @map)
 
     moveRight: =>
-      @link.direction = 'right'
-      return @render(@link.position.x+1, @link.position.y, @link.map)
+      @direction = 'right'
+      return @render(@position.x+1, @position.y, @map)
 
     moveUp: =>
-      @link.direction = 'up'
-      return @render(@link.position.x, @link.position.y-1, @link.map)
+      @direction = 'up'
+      return @render(@position.x, @position.y-1, @map)
 
     moveDown: =>
-      @link.direction = 'down'
-      return @render(@link.position.x, @link.position.y+1, @link.map)
+      @direction = 'down'
+      return @render(@position.x, @position.y+1, @map)
 
     atDungeonDoor: () =>
-      position = @world.getPositionSelector @link.position.x,
-                                            @link.position.y,
-                                            @link.map
+      position = @world.getPositionSelector @position.x,
+                                            @position.y,
+                                            @map
 
-      if @link.map is 'world'
+      if @map is 'world'
         dungeon = $(position).data('dungeon')
         return if dungeon then 'dungeon'+dungeon else false
       else
@@ -48,33 +46,33 @@ define ->
 
       x = $('.'+dungeon+' .P').data('x')
       y = $('.'+dungeon+' .P').data('y')
-      @link.direction = 'standing'
+      @direction = 'standing'
       @render(x, y, dungeon)
 
     leave: =>
       return if not @atDungeonDoor()
 
-      x = $('.'+@link.map+'-entrance').data('x')
-      y = $('.'+@link.map+'-entrance').data('y')
-      @link.direction = 'standing'
+      x = $('.'+@map+'-entrance').data('x')
+      y = $('.'+@map+'-entrance').data('y')
+      @direction = 'standing'
       @render(x, y, 'world')
 
     render: (x, y, map) =>
       @remove()
-      @link.position.x = x
-      @link.position.y = y
-      @link.map = map
-      position = @world.getPositionSelector @link.position.x,
-                                            @link.position.y,
-                                            @link.map
-      link = '<div class="link link-'+@link.direction+'"></div>'
+      @position.x = x
+      @position.y = y
+      @map = map
+      position = @world.getPositionSelector @position.x,
+                                            @position.y,
+                                            @map
+      link = '<div class="link link-'+@direction+'"></div>'
       $(position, map).append(link)
       return
 
     remove: () =>
-      link = @world.getPositionSelector @link.position.x,
-                                        @link.position.y,
-                                        @link.map, true
+      link = @world.getPositionSelector @position.x,
+                                        @position.y,
+                                        @map, true
       $(link).remove() if link
 
 
