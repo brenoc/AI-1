@@ -1,43 +1,27 @@
 
+# This module is responsible for the Menu UI
 define ->
   class Menu
-    constructor: (setup, world, link, astar) ->
-      @setup = setup
-      @world = world
-      @link = link
-      @astar = astar
-
+    constructor: (adventure) ->
+      @adventure = adventure
       @sound = false
 
       @bind()
 
+    # Bind click events
     bind: =>
       @bindStart()
       @bindSound()
 
+    # Bind the Start button to initialize the algorithm
     bindStart: =>
       $('#start').on 'click', =>
-        destination =
-          x: 30
-          y: 2
-          map: 'world'
+        info = @adventure.start()
 
-        start = new Date().getTime()
-        result = @astar.findPath  destination.map,
-                                  @setup.link.x,
-                                  @setup.link.y,
-                                  destination.x,
-                                  destination.y
-        end = new Date().getTime()
+        $('#time').text(info.time + ' ms')
+        $('#cost').text(info.cost)
 
-        @astar.utils.cleanUp(destination.map)
-        @moveAlongThePath(result.path)
-
-        time = end - start
-        $('#time').text(time + ' ms')
-        $('#cost').text(result.cost)
-        return
-
+    # Bind sound button to play and stop the music
     bindSound: =>
       $('#sound').on 'click', =>
         theme = $('#theme')[0]
@@ -51,18 +35,3 @@ define ->
           $('#sound').removeClass('glyphicon-volume-off')
           $('#sound').addClass('glyphicon-volume-up')
           @sound = true
-
-    moveAlongThePath: (path) ->
-      for movement, i in path
-        setTimeout do (movement) ->
-          ->
-            if movement[0] > @link.position.x
-              @link.moveRight()
-            else if movement[0] < @link.position.x
-              @link.moveLeft()
-            else if movement[1] > @link.position.y
-              @link.moveDown()
-            else if movement[1] < @link.position.y
-              @link.moveUp()
-        , 1000 + (i*50)
-
