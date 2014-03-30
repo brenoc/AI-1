@@ -4,6 +4,7 @@ define ['render/World'], (World) ->
     constructor: (world) ->
       @world = world
 
+    # Check if node is part of the map or it doesn't have Infinity cost
     isWalkable: (map, node) =>
       x = node.data('x')
       y = node.data('y')
@@ -20,7 +21,7 @@ define ['render/World'], (World) ->
       else
         return false
 
-
+    # Check if a is the same point as b
     isSamePoint: (a, b) ->
       xa = a.data('x')
       ya = a.data('y')
@@ -30,6 +31,8 @@ define ['render/World'], (World) ->
 
       return xa is xb and ya is yb
 
+    # Returns the path from start to finish as an array of coordinates
+    # Like so: [[x0,y0],[x1,y1],...,[xf,yf]]
     reversePath: (node) ->
       path = [[node.data('x'), node.data('y')]]
       while node.data('parent')
@@ -38,6 +41,7 @@ define ['render/World'], (World) ->
 
       return path.reverse()
 
+    # Get walkable neighbors from the node
     getNeighbors: (map, node) =>
       x = node.data('x')
       y = node.data('y')
@@ -52,6 +56,8 @@ define ['render/World'], (World) ->
       return _.filter candidates, (p) =>
         return @isWalkable(map, p)
 
+    # Clean all the data given to the nodes during the AStar algorithm
+    # You MUST call this function after calling the AStar algorithm
     cleanUp: (map) ->
       $('.map-'+map+' td').data('opened', null)
       $('.map-'+map+' td').data('closed', null)

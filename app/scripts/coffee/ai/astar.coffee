@@ -5,12 +5,18 @@ define ['structure/Heap', 'ai/Utils'], (Heap, Utils) ->
       @utils = new Utils(world)
       @world = world
 
+    # Manhattan
     h: (a, b) ->
       d1 = Math.abs(b.data('x') - a.data('x'))
       d2 = Math.abs(b.data('y') - a.data('y'))
       return d1 + d2
 
+    # AStar Algorithm
+    # map - name of the map ('world', 'dungeon1', etc)
+    # x0, y0 - start point
+    # xf, yf - final point
     findPath: (map, x0, y0, xf, yf) ->
+
       # Create a custom comparison function
       openList = new Heap (a,b) ->
         return a.data('f') - b.data('f')
@@ -31,7 +37,7 @@ define ['structure/Heap', 'ai/Utils'], (Heap, Utils) ->
         ndx = node.data('x')
         ndy = node.data('y')
 
-
+        # In this case we arrived to the final destination
         if @utils.isSamePoint(node, endNode)
           path = @utils.reversePath(endNode)
 
@@ -74,4 +80,5 @@ define ['structure/Heap', 'ai/Utils'], (Heap, Utils) ->
             else
               openList.updateItem(neighbor)
 
+      # Couldn't make it until the end
       return []
