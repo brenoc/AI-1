@@ -3,6 +3,8 @@ AI-1
 
 First project of Artificial Intelligence class @ PUC-Rio
 
+![Preview](https://raw.githubusercontent.com/brenoc/AI-1/master/Documentation/print.png)
+
 ## Instructions for development
 
 ### Setup
