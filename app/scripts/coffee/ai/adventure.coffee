@@ -9,23 +9,34 @@ define ['render/world', 'render/link', 'ai/astar'],
         @astar = new AStar(setup, @world)
 
       start: () ->
+        # Example of usage:
+
+        # Give the algorithm some destination
+        # x, y point of destiny and name of the map
         destination =
           x: 30
           y: 2
           map: 'world'
 
+        # Start timer
         start = new Date().getTime()
+        # Call the AStar algorithm
         result = @astar.findPath  destination.map,
                                   @setup.link.x,
                                   @setup.link.y,
                                   destination.x,
                                   destination.y
+        # End timer
         end = new Date().getTime()
         time = end - start
 
+        # ALWAYS call this function after the AStar algorithm
         @astar.utils.cleanUp(destination.map)
+
+        # Makes Link walk
         @moveAlongThePath(result.path)
 
+        # Return the time and cost
         info =
           time: time
           cost: result.cost
