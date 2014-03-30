@@ -128,7 +128,7 @@
 }
 
 /* Misc */
-.stats, .map-dungeon {
+.menu, .map-dungeon {
   width: 280px;
   height: 280px;
 }
@@ -137,13 +137,13 @@
   position: absolute; bottom: 0;
 }
 
-.stats {
+.menu {
   background: rgba(255, 255, 255, 0.6);
   position: absolute;
   top: 0;
 }
 
-.stats h1 {
+.menu h1 {
   font-family: 'Triforce', Arial, sans-serif;
   color: #af8e2d;
   text-align: center;
@@ -152,6 +152,37 @@
   margin: 0 0 10px;
 }
 
+.menu .info {
+  padding: 10px;
+}
+
+#start {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-family: 'Triforce', Arial, sans-serif;
+  font-size: 24px;
+}
+
+.nav-pills li {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #428bca;
+}
+
+.nav-pills li .badge {
+  color: #428bca;
+  background-color: #fff;
+}
+
+#sound {
+  cursor: pointer;
+  font-weight: normal;
+}
 
 .main {
   margin-top: -100px;

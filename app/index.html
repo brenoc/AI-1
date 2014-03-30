@@ -33,8 +33,31 @@
 
     <div class="row main">
       <div class="sidebar-left">
-        <div class="stats">
-          <h1>Stats</h1>
+
+        <div class="menu">
+          <h1>Menu</h1>
+          <div class="info">
+            <ul class="nav nav-pills nav-stacked">
+              <li class="active">
+                <span id="cost" class="badge pull-right"></span>
+                Cost
+              </li>
+              <li class="active">
+                <span id="time" class="badge pull-right"></span>
+                Time
+              </li>
+              <li class="active sound-line">
+                <span class="badge pull-right">
+                  <span id="sound" class="glyphicon glyphicon-volume-off"></span>
+                </span>
+                Sound
+              </li>
+            </ul>
+
+
+          </div>
+
+          <button id="start" class="btn btn-large btn-warning">Start</button>
         </div>
         <table class="map-dungeon map-dungeon-bottom-left map-dungeon1">
           <tbody>
@@ -4427,6 +4450,9 @@
     </div>
 
     <div class="row footer">
+      <audio id="theme" class="sounds" src="sounds/theme.mp3" loop>
+        <p>Seu navegador não suporta o elemento audio </p>
+      </audio>
       <p class="pull-right">por Breno Calazans e Marcello Lins</p>
     </div>
 

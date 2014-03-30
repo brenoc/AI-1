@@ -47,7 +47,9 @@ setup =
     y: 27
 
 # Main function
-requirejs ['render/world', 'render/link', 'ai/astar'], (World, Link, AStar) ->
-  window.world = new World(setup)
-  window.link = new Link(setup, world)
-  window.AStar = new AStar(setup, world)
+requirejs ['render/world', 'render/link', 'ai/astar', 'ui/menu'],
+  (World, Link, AStar, Menu) ->
+    window.world = new World(setup)
+    window.link = new Link(setup, world)
+    window.astar = new AStar(setup, world)
+    window.menu = new Menu(setup, world, link, astar)
