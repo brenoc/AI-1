@@ -39,6 +39,13 @@ define ->
       else
         return $(position).hasClass('P')
 
+    getPendant: () =>
+      position = @world.getPositionSelector @position.x,
+                                            @position.y,
+                                            @map
+
+      $(position).removeClass('X')
+
     enter: =>
       return if not @atDungeonDoor()
 
@@ -74,5 +81,3 @@ define ->
                                         @position.y,
                                         @map, true
       $(link).remove() if link
-
-
