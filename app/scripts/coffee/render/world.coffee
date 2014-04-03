@@ -1,5 +1,5 @@
 
-define ['render/map'], (Map, Link) ->
+define ['render/map', 'structure/grid'], (Map, Grid) ->
   class World
     constructor: (setup) ->
       @maps = new Map()
@@ -10,28 +10,41 @@ define ['render/map'], (Map, Link) ->
       @dungeon2Map = '.map-dungeon-bottom-right tbody'
       @dungeon3Map = '.map-dungeon-top-right tbody'
 
+      @grid = {}
+      @gridEverything()
+
       @render()
 
+    gridEverything: =>
+      world = new Grid(@maps.world)
+      dungeon1 = new Grid(@maps.dungeon1)
+      dungeon2 = new Grid(@maps.dungeon2)
+      dungeon3 = new Grid(@maps.dungeon3)
+
+      delete @grid
+      @grid =
+        'world': world
+        'dungeon1': dungeon1
+        'dungeon2': dungeon2
+        'dungeon3': dungeon3
+
     render: =>
-      @renderMap(@maps.world, 'world')
-      @renderMap(@maps.dungeon1, 'dungeon1')
-      @renderMap(@maps.dungeon2, 'dungeon2')
-      @renderMap(@maps.dungeon3, 'dungeon3')
+      @renderMap(@grid.world, 'world')
+      @renderMap(@grid.dungeon1, 'dungeon1')
+      @renderMap(@grid.dungeon2, 'dungeon2')
+      @renderMap(@grid.dungeon3, 'dungeon3')
       @renderConfigElements()
 
     renderMap: (map, elem) ->
       mapDOM = elem
-      y = 0
+
       for row in map
-        x = 0
-        for col in row
-          @getPositionSelector(x, y, mapDOM)
-            .addClass(col)
-            .data('cost', @getCost(col))
-            .data('x', x)
-            .data('y', y)
-          x++
-        y++
+        for node in row
+          @getPositionSelector(node.x, node.y, mapDOM)
+            .addClass(node.type)
+            .data('cost', node.cost)
+            .data('x', node.x)
+            .data('y', node.y)
 
     renderConfigElements: =>
       @renderWorldElements()
@@ -69,14 +82,8 @@ define ['render/map'], (Map, Link) ->
       else
         return $('.map-'+map+' .map-row-'+y+'.map-col-'+x)
 
-    getCost: (type) ->
-      switch type
-        when 'G' then return 10
-        when 'S' then return 20
-        when 'F' then return 100
-        when 'M' then return 150
-        when 'W' then return 180
-        when 'L' then return 10
-        when 'D' then return Infinity
-        else return 0
-
+    getNode: (x, y, map) ->
+      if @grid[map][y]?[x]?
+        return @grid[map][y][x]
+      else
+        return false

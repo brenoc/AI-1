@@ -7,8 +7,8 @@ define ['structure/Heap', 'ai/Utils'], (Heap, Utils) ->
 
     # Manhattan
     h: (a, b) ->
-      d1 = Math.abs(b.data('x') - a.data('x'))
-      d2 = Math.abs(b.data('y') - a.data('y'))
+      d1 = Math.abs(b.x - a.x)
+      d2 = Math.abs(b.y - a.y)
       return d1 + d2
 
     # AStar Algorithm
@@ -19,66 +19,56 @@ define ['structure/Heap', 'ai/Utils'], (Heap, Utils) ->
 
       # Create a custom comparison function
       openList = new Heap (a,b) ->
-        return a.data('f') - b.data('f')
+        return a.f - b.f
 
-      startNode = @world.getPositionSelector(x0, y0, map)
-      endNode = @world.getPositionSelector(xf, yf, map)
+      startNode = @world.getNode(x0, y0, map)
+      endNode = @world.getNode(xf, yf, map)
 
-      startNode.data('g', 0)
-      startNode.data('f', 0)
-      startNode.data('opened', true)
+      startNode.g = 0
+      startNode.f = 0
+      startNode.opened = true
 
       openList.push(startNode)
 
       while not openList.empty()
-
         node = openList.pop()
-        node.data('closed', true)
-        ndx = node.data('x')
-        ndy = node.data('y')
+        node.closed = true
 
         # In this case we arrived to the final destination
-        if @utils.isSamePoint(node, endNode)
+        if node.x is endNode.x and node.y is endNode.y
           path = @utils.reversePath(endNode)
 
           result =
             path: path
-            cost: node.data('f')
-
+            cost: node.f
           return result
 
 
         neighbors = @utils.getNeighbors(map, node)
-
         for neighbor in neighbors
-
-          if neighbor.data('closed') then continue
-
-          nbx = neighbor.data('x')
-          nby = neighbor.data('y')
+          if neighbor.closed then continue
 
           # Calculate g
-          ng = node.data('g') + neighbor.data('cost')
+          ng = node.g + neighbor.cost
 
-          beenVisited = neighbor.data('opened')
+          beenVisited = neighbor.opened
 
-          if not beenVisited or ng < neighbor.data('g')
+          if not beenVisited or ng < neighbor.g
+            neighbor.opened = true
+            neighbor.g = ng
 
-            neighbor.data('opened', true)
-            neighbor.data('g', ng)
-
-            if not neighbor.data('h')
+            if not neighbor.h
               # Calculate h
-              neighbor.data('h', @h(neighbor, endNode))
+              neighbor.h = @h(neighbor, endNode)
 
             # Calculate f
-            neighbor.data('f', ng + neighbor.data('h'))
-            neighbor.data('parent', node)
+            neighbor.f = ng + neighbor.h
+            neighbor.parent = node
 
             if not beenVisited
               openList.push(neighbor)
             else
               openList.updateItem(neighbor)
 
-      # Couldn't make it until the end
+      # Couldn't find a path
       return []

@@ -31,7 +31,7 @@ define ['render/world', 'render/link', 'ai/astar'],
         time = end - start
 
         # ALWAYS call this function after the AStar algorithm
-        @astar.utils.cleanUp(destination.map)
+        @world.gridEverything()
 
         # Makes Link walk
         @moveAlongThePath(result.path)
