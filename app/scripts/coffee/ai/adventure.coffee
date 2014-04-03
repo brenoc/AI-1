@@ -36,6 +36,13 @@ define ['render/world', 'render/link', 'ai/astar'],
         # Makes Link walk
         @moveAlongThePath(result.path)
 
+        ###
+        Link may take some actions, like:
+        @link.enter() - Link enter the dungeon door (must be over the door)
+        @link.leave() - Link leave the dungeon (must be over the door)
+        @link.getPendant() - Link take the pendant (must be over the pendant)
+        ###
+
         # Return the time and cost
         info =
           time: time
