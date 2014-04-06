@@ -84,7 +84,7 @@ define ['render/world', 'render/link', 'ai/astar'],
               else if movement[1] < @link.position.y
                 @link.moveUp()
           , (i*50)
-
+          
       CalculateFullCost: (map, startPoint, firstStop,
                                 secondStop, thirdStop,
                                 endPoint) =>
@@ -127,6 +127,10 @@ define ['render/world', 'render/link', 'ai/astar'],
         
         return fullCost
         
+        #Class to Map Cost + Steps Order
+      class CostsMapper
+        constructor : (@cost, @firstPoint, @secondPoint, @thirdPoint) ->
+        
        #Possible Combinations
        # START,D1,D2,D3,DW
        # START,D1,D3,D2,DW
@@ -136,7 +140,28 @@ define ['render/world', 'render/link', 'ai/astar'],
        # START,D3,D1,D2,DW
        CalculateBestCost: =>
         
-        fullCost = @CalculateFullCost  'world', @setup.link,
+        pathCost = @CalculateFullCost  'world', @setup.link,
                                                   @dungeonOne, @dungeonTwo,
                                                   @dungeonThree, @darkWoods
+
+        costsMapper = new CostsMapper(pathCost,
+                                                            @dungeonOne,
+                                                            @dungeonTwo,
+                                                            @dungeonThree)
+                                                  
+        # Array Mapping costs with it's respective path
+        costsArray = [costsMapper]
+                                                  
+        pathCost = @CalculateFullCost  'world',@setup.link,
+                                                  @dungeonOne,
+                                                  @dungeonThree,
+                                                  @dungeonTwo,
+                                                  @darkWoods
+        
+        costsMapper = new CostsMapper(pathCost,@dungeonOne,
+                                                            @dungeonThree,
+                                                            @dungeonTwo)
+       
+        # Pushes new costs mapper to the array
+        costsArray.push costsMapper
         
