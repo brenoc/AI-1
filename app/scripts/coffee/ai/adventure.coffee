@@ -9,13 +9,35 @@ define ['render/world', 'render/link', 'ai/astar'],
         @astar = new AStar(setup, @world)
 
       start: () ->
+	    # Hardcoded dungeon addresses
+        dungeonOne =
+         x: 24
+         y: 1
+         
+        dungeonTwo =
+         x: 39
+         y: 17
+        
+        dungeonThree =
+         x: 5
+         y: 32
+         
+        darkWoods =
+         x: 7
+         y: 6
+ 
+        # Calculating combination of costs
+        fullCost = @CalculateFullCost  'world', @setup.link,
+                                                  dungeonOne, dungeonTwo,
+                                                  dungeonThree, darkWoods
+        
         # Example of usage:
 
         # Give the algorithm some destination
         # x, y point of destiny and name of the map
         destination =
-          x: 30
-          y: 2
+          x: 5
+          y: 39
           map: 'world'
 
         # Start timer
@@ -24,8 +46,9 @@ define ['render/world', 'render/link', 'ai/astar'],
         result = @astar.findPath  destination.map,
                                   @setup.link.x,
                                   @setup.link.y,
-                                  destination.x,
-                                  destination.y
+                                  dungeonThree.x,
+                                  dungeonThree.y
+   
         # End timer
         end = new Date().getTime()
         time = end - start
@@ -63,3 +86,45 @@ define ['render/world', 'render/link', 'ai/astar'],
               else if movement[1] < @link.position.y
                 @link.moveUp()
           , (i*50)
+
+      CalculateFullCost: (map, startPoint, firstStop,
+                                secondStop, thirdStop,
+                                endPoint) =>
+        
+        result = @astar.findPath  map,
+                                  startPoint.x,
+                                  startPoint.y,
+                                  firstStop.x,
+                                  firstStop.y
+         
+        #First Path cost
+        fullCost = result.cost
+        
+        #Second Path Cost
+        result = @astar.findPath  map,
+                                  firstStop.x,
+                                  firstStop.y,
+                                  secondStop.x,
+                                  secondStop.y
+        
+        fullCost = fullCost + result.cost
+        
+        #Third Path Cost
+        result = @astar.findPath  map,
+                                  secondStop.x,
+                                  secondStop.y,
+                                  thirdStop.x,
+                                  thirdStop.y
+                                  
+        fullCost = fullCost + result.cost
+        
+        # Forth Path Cost
+        result = @astar.findPath  map,
+                                  thirdStop.x,
+                                  thirdStop.y,
+                                  endPoint.x,
+                                  endPoint.y
+        
+        fullCost = fullCost + result.cost
+        
+        return fullCost
