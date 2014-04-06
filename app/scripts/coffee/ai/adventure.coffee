@@ -26,43 +26,40 @@ define ['render/world', 'render/link', 'ai/astar'],
          x: 7
          y: 6
  
+        # Start timer
+        #start = new Date().getTime() 
+         
         # Calculating combination of costs
         result = @CalculateBestCost()
-        
-        # Example of usage:
-
-        # Give the algorithm some destination
-        # x, y point of destiny and name of the map
-        destination =
-          x: 5
-          y: 39
-          map: 'world'
-
-        # Start timer
-        start = new Date().getTime()
-        # Call the AStar algorithm
-        result = @astar.findPath  destination.map,
-                                  @setup.link.x,
-                                  @setup.link.y,
-                                  dungeonThree.x,
-                                  dungeonThree.y
-   
+      
         # End timer
         end = new Date().getTime()
         time = end - start
+        
+        # Calling the algorithm to get the path of each step of the route
+        firstPath = @astar.findPath  'world',
+                                  @setup.link.x,
+                                  @setup.link.y,
+                                  result.firstPoint.x,
+                                  result.firstPoint.y
 
         # ALWAYS call this function after the AStar algorithm
         @world.gridEverything()
 
         # Makes Link walk
-        @moveAlongThePath(result.path)
-
-        ###
-        Link may take some actions, like:
-        @link.enter() - Link enter the dungeon door (must be over the door)
-        @link.leave() - Link leave the dungeon (must be over the door)
-        @link.getPendant() - Link take the pendant (must be over the pendant)
-        ###
+        @moveAlongThePath(firstPath.path)
+        
+        # Makes Link Enter Dungeon
+        # @link.enter ()
+        
+        # Walk to the pendant
+        # TODO
+        
+        # Walk Back to the Door
+        # TODO
+        
+        # Leaves Dungeon
+        #@link.leave()
 
         # Return the time and cost
         info =
@@ -97,6 +94,7 @@ define ['render/world', 'render/link', 'ai/astar'],
          
         #First Path cost
         fullCost = result.cost
+        @world.gridEverything()
         
         #Second Path Cost
         result = @astar.findPath  map,
@@ -106,6 +104,7 @@ define ['render/world', 'render/link', 'ai/astar'],
                                   secondStop.y
         
         fullCost = fullCost + result.cost
+        @world.gridEverything()
         
         #Third Path Cost
         result = @astar.findPath  map,
@@ -115,6 +114,7 @@ define ['render/world', 'render/link', 'ai/astar'],
                                   thirdStop.y
                                   
         fullCost = fullCost + result.cost
+        @world.gridEverything()
         
         # Forth Path Cost
         result = @astar.findPath  map,
@@ -124,6 +124,7 @@ define ['render/world', 'render/link', 'ai/astar'],
                                   endPoint.y
         
         fullCost = fullCost + result.cost
+        @world.gridEverything()
         
         return fullCost
         
@@ -226,8 +227,8 @@ define ['render/world', 'render/link', 'ai/astar'],
         # Picking the best cost found
         lowestCost = costsArray[0]
         
-        for currentElement of costsArray
-         if currentElement.cost < lowestCost
+        for currentElement in costsArray
+         if currentElement.cost < lowestCost.cost
           lowestCost = currentElement
           
         return lowestCost  
