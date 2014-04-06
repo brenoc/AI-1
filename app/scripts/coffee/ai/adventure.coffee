@@ -10,26 +10,24 @@ define ['render/world', 'render/link', 'ai/astar'],
 
       start: () ->
 	    # Hardcoded dungeon addresses
-        dungeonOne =
+        @dungeonOne =
          x: 24
          y: 1
          
-        dungeonTwo =
+        @dungeonTwo =
          x: 39
          y: 17
         
-        dungeonThree =
+        @dungeonThree =
          x: 5
          y: 32
          
-        darkWoods =
+        @darkWoods =
          x: 7
          y: 6
  
         # Calculating combination of costs
-        fullCost = @CalculateFullCost  'world', @setup.link,
-                                                  dungeonOne, dungeonTwo,
-                                                  dungeonThree, darkWoods
+        result = @CalculateBestCost()
         
         # Example of usage:
 
@@ -128,3 +126,17 @@ define ['render/world', 'render/link', 'ai/astar'],
         fullCost = fullCost + result.cost
         
         return fullCost
+        
+       #Possible Combinations
+       # START,D1,D2,D3,DW
+       # START,D1,D3,D2,DW
+       # START,D2,D1,D3,DW
+       # START,D2,D3,D1,DW
+       # START,D3,D2,D1,DW
+       # START,D3,D1,D2,DW
+       CalculateBestCost: =>
+        
+        fullCost = @CalculateFullCost  'world', @setup.link,
+                                                  @dungeonOne, @dungeonTwo,
+                                                  @dungeonThree, @darkWoods
+        
