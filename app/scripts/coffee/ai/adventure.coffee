@@ -223,3 +223,12 @@ define ['render/world', 'render/link', 'ai/astar'],
         # Pushes new costs mapper to the array
         costsArray.push costsMapper
         
+        # Picking the best cost found
+        lowestCost = costsArray[0]
+        
+        for currentElement of costsArray
+         if currentElement.cost < lowestCost
+          lowestCost = currentElement
+          
+        return lowestCost  
+        
