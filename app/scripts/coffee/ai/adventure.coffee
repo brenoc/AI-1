@@ -8,8 +8,8 @@ define ['render/world', 'render/link', 'ai/astar'],
         @link = new Link(setup, @world)
         @astar = new AStar(setup, @world)
 
-      start: () ->
-	    # Hardcoded dungeon addresses
+      start: () ->      
+        # Hardcoded dungeon addresses
         @dungeonOne =
          x: 24
          y: 1
@@ -70,7 +70,7 @@ define ['render/world', 'render/link', 'ai/astar'],
 
         # ALWAYS call this function after the AStar algorithm
         @world.gridEverything()
-
+        
         # Makes Link walk
         @moveAlongThePath(secondPath.path)
         
