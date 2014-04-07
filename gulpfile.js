@@ -46,8 +46,14 @@ gulp.task('images', function () {
 
 // Fonts
 gulp.task('fonts', function () {
-  return gulp.src('app/styles/*.ttf')
-  .pipe(gulp.dest('dist/styles'))
+  return gulp.src('app/fonts/*')
+  .pipe(gulp.dest('dist/fonts'))
+});
+
+// Sounds
+gulp.task('sounds', function () {
+  return gulp.src('app/sounds/*.mp3')
+  .pipe(gulp.dest('dist/sounds'))
 });
 
 // Clean
@@ -65,7 +71,7 @@ gulp.task('bundle', ['scripts'],
 );
 
 // Build
-gulp.task('build', ['html', 'bundle', 'images', 'fonts']);
+gulp.task('build', ['html', 'bundle', 'images', 'fonts', 'sounds']);
 
 // Default task
 gulp.task('default', ['clean'], function () {

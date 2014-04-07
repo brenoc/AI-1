@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Triforce';
-  src: url('Triforce.ttf');
+  src: url('../fonts/Triforce.ttf');
 }
 
 .sidebar-left, .sidebar-right {
