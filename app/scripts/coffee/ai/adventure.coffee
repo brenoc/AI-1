@@ -7,25 +7,12 @@ define ['render/world', 'render/link', 'ai/astar'],
         @world = new World(setup)
         @link = new Link(setup, @world)
         @astar = new AStar(setup, @world)
+        @dungeonOne = setup.world.dungeon1
+        @dungeonTwo = setup.world.dungeon2
+        @dungeonThree = setup.world.dungeon3
+        @lostWoods = setup.world.lostwoods
 
       start: () ->
-        # Hardcoded dungeon addresses
-        @dungeonOne =
-         x: 24
-         y: 1
-
-        @dungeonTwo =
-         x: 39
-         y: 17
-
-        @dungeonThree =
-         x: 5
-         y: 32
-
-        @darkWoods =
-         x: 7
-         y: 6
-
         # Start timer
         #start = new Date().getTime()
 
@@ -115,8 +102,8 @@ define ['render/world', 'render/link', 'ai/astar'],
         forfthPath = @astar.findPath  'world',
                                   result.thirdPoint.x,
                                   result.thirdPoint.y,
-                                  @darkWoods.x,
-                                  @darkWoods.y
+                                  @lostWoods.x,
+                                  @lostWoods.y
 
         # ALWAYS call this function after the AStar algorithm
         @world.gridEverything()
@@ -207,7 +194,7 @@ define ['render/world', 'render/link', 'ai/astar'],
         # First Path Cost
         pathCost = @CalculateFullCost  'world', @setup.link,
                                                   @dungeonOne, @dungeonTwo,
-                                                  @dungeonThree, @darkWoods
+                                                  @dungeonThree, @lostWoods
 
         costsMapper = new CostsMapper(pathCost,
                                                             @dungeonOne,
@@ -222,7 +209,7 @@ define ['render/world', 'render/link', 'ai/astar'],
                                                   @dungeonOne,
                                                   @dungeonThree,
                                                   @dungeonTwo,
-                                                  @darkWoods
+                                                  @lostWoods
 
         costsMapper = new CostsMapper(pathCost,@dungeonOne,
                                                             @dungeonThree,
@@ -236,7 +223,7 @@ define ['render/world', 'render/link', 'ai/astar'],
                                                   @dungeonTwo,
                                                   @dungeonOne,
                                                   @dungeonThree,
-                                                  @darkWoods
+                                                  @lostWoods
 
         costsMapper = new CostsMapper(pathCost,@dungeonTwo,
                                                             @dungeonOne,
@@ -250,7 +237,7 @@ define ['render/world', 'render/link', 'ai/astar'],
                                                   @dungeonTwo,
                                                   @dungeonThree,
                                                   @dungeonOne,
-                                                  @darkWoods
+                                                  @lostWoods
 
         costsMapper = new CostsMapper(pathCost,@dungeonTwo,
                                                             @dungeonThree,
@@ -264,7 +251,7 @@ define ['render/world', 'render/link', 'ai/astar'],
                                                   @dungeonThree,
                                                   @dungeonOne,
                                                   @dungeonTwo,
-                                                  @darkWoods
+                                                  @lostWoods
 
         costsMapper = new CostsMapper(pathCost,@dungeonThree,
                                                             @dungeonOne,
@@ -278,7 +265,7 @@ define ['render/world', 'render/link', 'ai/astar'],
                                                   @dungeonThree,
                                                   @dungeonTwo,
                                                   @dungeonOne,
-                                                  @darkWoods
+                                                  @lostWoods
 
         costsMapper = new CostsMapper(pathCost,@dungeonThree,
                                                             @dungeonTwo,
