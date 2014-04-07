@@ -11,6 +11,7 @@ define ->
     # Bind click events
     bind: =>
       @bindStart()
+      @bindRestart()
       @bindSound()
 
     # Bind the Start button to initialize the algorithm
@@ -20,6 +21,12 @@ define ->
 
         $('#time').text(info.time + ' ms')
         $('#cost').text(info.cost)
+        $(this).hide()
+        $('#restart').show()
+
+    bindRestart: ->
+      $('#restart').on 'click', ->
+        window.location.reload()
 
     # Bind sound button to play and stop the music
     bindSound: =>

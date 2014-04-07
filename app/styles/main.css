@@ -156,7 +156,7 @@
   padding: 10px;
 }
 
-#start {
+#start, #restart {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -164,6 +164,7 @@
   font-family: 'Triforce', Arial, sans-serif;
   font-size: 24px;
 }
+#restart { display: none; }
 
 .nav-pills li {
   position: relative;
