@@ -70,6 +70,11 @@ define ['render/map', 'structure/grid'], (Map, Grid) ->
         .addClass('lost-woods')
         .addClass('O')
 
+      # Render Master Sword
+      setup = @setup.world['sword']
+      @getPositionSelector(setup.x, setup.y, 'world')
+        .addClass('E')
+
     renderDungeonElements: =>
       # Render dungeons doors and pendants
       i = 1
