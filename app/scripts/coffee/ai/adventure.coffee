@@ -193,83 +193,84 @@ define ['render/world', 'render/link', 'ai/astar'],
 
         # First Path Cost
         pathCost = @CalculateFullCost  'world', @setup.link,
-                                                  @dungeonOne, @dungeonTwo,
-                                                  @dungeonThree, @lostWoods
+                                                @dungeonOne,
+                                                @dungeonTwo,
+                                                @dungeonThree,
+                                                @lostWoods
 
-        costsMapper = new CostsMapper(pathCost,
-                                                            @dungeonOne,
-                                                            @dungeonTwo,
-                                                            @dungeonThree)
+        costsMapper = new CostsMapper(pathCost, @dungeonOne,
+                                                @dungeonTwo,
+                                                @dungeonThree)
 
         # Array Mapping costs with it's respective path
         costsArray = [costsMapper]
 
         # Second Path Cost
-        pathCost = @CalculateFullCost  'world',@setup.link,
-                                                  @dungeonOne,
-                                                  @dungeonThree,
-                                                  @dungeonTwo,
-                                                  @lostWoods
+        pathCost = @CalculateFullCost  'world', @setup.link,
+                                                @dungeonOne,
+                                                @dungeonThree,
+                                                @dungeonTwo,
+                                                @lostWoods
 
-        costsMapper = new CostsMapper(pathCost,@dungeonOne,
-                                                            @dungeonThree,
-                                                            @dungeonTwo)
+        costsMapper = new CostsMapper(pathCost, @dungeonOne,
+                                                @dungeonThree,
+                                                @dungeonTwo)
 
         # Pushes new costs mapper to the array
         costsArray.push costsMapper
 
         # Third Path Cost
-        pathCost = @CalculateFullCost  'world',@setup.link,
-                                                  @dungeonTwo,
-                                                  @dungeonOne,
-                                                  @dungeonThree,
-                                                  @lostWoods
+        pathCost = @CalculateFullCost  'world', @setup.link,
+                                                @dungeonTwo,
+                                                @dungeonOne,
+                                                @dungeonThree,
+                                                @lostWoods
 
-        costsMapper = new CostsMapper(pathCost,@dungeonTwo,
-                                                            @dungeonOne,
-                                                            @dungeonThree)
+        costsMapper = new CostsMapper(pathCost, @dungeonTwo,
+                                                @dungeonOne,
+                                                @dungeonThree)
 
         # Pushes new costs mapper to the array
         costsArray.push costsMapper
 
         # Forth Path Cost
-        pathCost = @CalculateFullCost  'world',@setup.link,
-                                                  @dungeonTwo,
-                                                  @dungeonThree,
-                                                  @dungeonOne,
-                                                  @lostWoods
+        pathCost = @CalculateFullCost  'world', @setup.link,
+                                                @dungeonTwo,
+                                                @dungeonThree,
+                                                @dungeonOne,
+                                                @lostWoods
 
-        costsMapper = new CostsMapper(pathCost,@dungeonTwo,
-                                                            @dungeonThree,
-                                                            @dungeonOne)
+        costsMapper = new CostsMapper(pathCost, @dungeonTwo,
+                                                @dungeonThree,
+                                                @dungeonOne)
 
         # Pushes new costs mapper to the array
         costsArray.push costsMapper
 
         # Fifth Path Cost
-        pathCost = @CalculateFullCost  'world',@setup.link,
-                                                  @dungeonThree,
-                                                  @dungeonOne,
-                                                  @dungeonTwo,
-                                                  @lostWoods
+        pathCost = @CalculateFullCost  'world', @setup.link,
+                                                @dungeonThree,
+                                                @dungeonOne,
+                                                @dungeonTwo,
+                                                @lostWoods
 
-        costsMapper = new CostsMapper(pathCost,@dungeonThree,
-                                                            @dungeonOne,
-                                                            @dungeonTwo)
+        costsMapper = new CostsMapper(pathCost, @dungeonThree,
+                                                @dungeonOne,
+                                                @dungeonTwo)
 
         # Pushes new costs mapper to the array
         costsArray.push costsMapper
 
         # Sixth Path Cost
-        pathCost = @CalculateFullCost  'world',@setup.link,
-                                                  @dungeonThree,
-                                                  @dungeonTwo,
-                                                  @dungeonOne,
-                                                  @lostWoods
+        pathCost = @CalculateFullCost  'world', @setup.link,
+                                                @dungeonThree,
+                                                @dungeonTwo,
+                                                @dungeonOne,
+                                                @lostWoods
 
-        costsMapper = new CostsMapper(pathCost,@dungeonThree,
-                                                            @dungeonTwo,
-                                                            @dungeonOne)
+        costsMapper = new CostsMapper(pathCost, @dungeonThree,
+                                                @dungeonTwo,
+                                                @dungeonOne)
 
         # Pushes new costs mapper to the array
         costsArray.push costsMapper
