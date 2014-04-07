@@ -140,6 +140,6 @@ define ['render/world', 'render/link', 'ai/astar',
                 @link.moveDown()
               else if movement[1] < @link.position.y
                 @link.moveUp()
-          , (i*70)
+          , (i*@setup.speed)
 
 

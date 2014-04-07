@@ -46,6 +46,8 @@ setup =
     x: 24
     y: 27
 
+  speed: 70
+
 # Main function
 requirejs ['ai/adventure', 'ui/menu'], (Adventure, Menu) ->
   window.adventure = new Adventure(setup)
