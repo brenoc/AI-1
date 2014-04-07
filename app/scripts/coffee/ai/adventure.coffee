@@ -27,7 +27,7 @@ define ['render/world', 'render/link', 'ai/astar'],
          y: 6
  
         # Start timer
-        #start = new Date().getTime() 
+        #start = new Date().getTime()
          
         # Calculating combination of costs
         result = @CalculateBestCost()
@@ -50,7 +50,7 @@ define ['render/world', 'render/link', 'ai/astar'],
         @moveAlongThePath(firstPath.path)
         
         # Makes Link Enter Dungeon
-        # @link.enter ()
+        @link.enter()
         
         # Walk to the pendant
         # TODO
@@ -59,8 +59,71 @@ define ['render/world', 'render/link', 'ai/astar'],
         # TODO
         
         # Leaves Dungeon
-        #@link.leave()
+        @link.leave()
+        
+        # Second part of the Path
+        secondPath = @astar.findPath  'world',
+                                  result.firstPoint.x,
+                                  result.firstPoint.y,
+                                  result.secondPoint.x,
+                                  result.secondPoint.y
 
+        # ALWAYS call this function after the AStar algorithm
+        @world.gridEverything()
+
+        # Makes Link walk
+        @moveAlongThePath(secondPath.path)
+        
+        # Makes Link Enter Dungeon
+        @link.enter()
+        
+        # Walk to the pendant
+        # TODO
+        
+        # Walk Back to the Door
+        # TODO
+        
+        # Leaves Dungeon
+        @link.leave()
+        
+        # Third part of the Path
+        thirdPath = @astar.findPath  'world',
+                                  result.secondPoint.x,
+                                  result.secondPoint.y,
+                                  result.thirdPoint.x,
+                                  result.thirdPoint.y
+
+        # ALWAYS call this function after the AStar algorithm
+        @world.gridEverything()
+
+        # Makes Link walk
+        @moveAlongThePath(thirdPath.path)
+        
+        # Makes Link Enter Dungeon
+        @link.enter()
+        
+        # Walk to the pendant
+        # TODO
+        
+        # Walk Back to the Door
+        # TODO
+        
+        # Leaves Dungeon
+        @link.leave()
+        
+        # Forth part of the Path
+        forfthPath = @astar.findPath  'world',
+                                  result.thirdPoint.x,
+                                  result.thirdPoint.y,
+                                  @darkWoods.x,
+                                  @darkWoods.y
+
+        # ALWAYS call this function after the AStar algorithm
+        @world.gridEverything()
+
+        # Makes Link walk
+        @moveAlongThePath(forfthPath.path)
+        
         # Return the time and cost
         info =
           time: time
@@ -228,8 +291,7 @@ define ['render/world', 'render/link', 'ai/astar'],
         lowestCost = costsArray[0]
         
         for currentElement in costsArray
-         if currentElement.cost < lowestCost.cost
-          lowestCost = currentElement
+          if currentElement.cost < lowestCost.cost
+            lowestCost = currentElement
           
-        return lowestCost  
-        
+        return lowestCost
