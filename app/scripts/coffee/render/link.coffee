@@ -51,8 +51,8 @@ define ->
 
       dungeon = @atDungeonDoor()
 
-      x = $('.'+dungeon+' .P').data('x')
-      y = $('.'+dungeon+' .P').data('y')
+      x = $('.map-'+dungeon+' .P').data('x')
+      y = $('.map-'+dungeon+' .P').data('y')
       @direction = 'standing'
       @render(x, y, dungeon)
 

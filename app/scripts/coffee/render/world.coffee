@@ -79,6 +79,8 @@ define ['render/map', 'structure/grid'], (Map, Grid) ->
 
         @getPositionSelector(setup.door.x, setup.door.y, current)
           .addClass('P')
+          .data('x', setup.door.x)
+          .data('y', setup.door.y)
         @getPositionSelector(setup.pendant.x, setup.pendant.y, current)
           .addClass('X')
 
