@@ -51,6 +51,7 @@ define ['render/map', 'structure/grid'], (Map, Grid) ->
       @renderDungeonElements()
 
     renderWorldElements: =>
+      # Render dungeons doors
       i = 1
       while i < 4
         current = 'dungeon'+i
@@ -63,7 +64,14 @@ define ['render/map', 'structure/grid'], (Map, Grid) ->
 
         i++
 
+      # Render Lost Woods
+      setup = @setup.world['lostwoods']
+      @getPositionSelector(setup.x, setup.y, 'world')
+        .addClass('lost-woods')
+        .addClass('O')
+
     renderDungeonElements: =>
+      # Render dungeons doors and pendants
       i = 1
       while i < 4
         current = 'dungeon'+i
